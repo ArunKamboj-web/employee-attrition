@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    /* Google Font */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:linear-gradient(135deg,#4F46E5,#3B82F6);
+    min-height:100vh;
+
+}
+
+/* Main */
+
+.page{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 15px;
+
+}
+
+.container{
+
+    width:100%;
+    max-width:950px;
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+}
+
+/* Hero */
+
+.hero{
+
+    text-align:center;
+    margin-bottom:35px;
+
+}
+
+.hero h1{
+
+    font-size:34px;
+    color:#1E293B;
+    margin-bottom:10px;
+
+}
+
+.hero p{
+
+    color:#64748B;
+    font-size:16px;
+
+}
+
+/* Sections */
+
+.section-title{
+
+    margin-top:30px;
+    margin-bottom:18px;
+    padding-left:12px;
+    border-left:5px solid #2563EB;
+    color:#1E293B;
+    font-size:22px;
+
+}
+
+/* Grid */
+
+.grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+
+}
+
+/* Inputs */
+
+.field{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.field label{
+
+    margin-bottom:8px;
+    font-weight:600;
+    color:#374151;
+
+}
+
+input,
+select{
+
+    width:100%;
+    padding:12px 15px;
+    border:1px solid #D1D5DB;
+    border-radius:10px;
+    font-size:15px;
+    transition:.3s;
+    background:white;
+
+}
+
+input:focus,
+select:focus{
+
+    outline:none;
+    border-color:#2563EB;
+    box-shadow:0 0 12px rgba(37,99,235,.25);
+
+}
+
+/* Button */
+
+button{
+
+    width:100%;
+    margin-top:35px;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#2563EB;
+    color:white;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#1D4ED8;
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(37,99,235,.3);
+
+}
+
+button:disabled{
+
+    cursor:not-allowed;
+    opacity:.7;
+
+}
+
+/* Loading */
+
+#loading{
+
+    margin-top:25px;
+    text-align:center;
+
+}
+
+.spinner{
+
+    width:60px;
+    height:60px;
+    margin:auto;
+    border:6px solid #ddd;
+    border-top:6px solid #2563EB;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+#loading p{
+
+    margin-top:15px;
+    color:#374151;
+    font-weight:500;
+
+}
+
+/* Result Card */
+
+.result-card{
+
+    margin-top:35px;
+    color:white;
+    padding:25px;
+    border-radius:15px;
+    animation:fade .5s ease;
+
+}
+
+.result-card h2{
+
+    margin-bottom:15px;
+
+}
+
+.result-card h3{
+
+    margin-top:12px;
+
+}
+
+.stay{
+
+    background:#16A34A;
+
+}
+
+.leave{
+
+    background:#DC2626;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/* Progress */
+
+.progress-bar{
+
+    width:100%;
+    height:14px;
+    margin:18px 0;
+    background:rgba(255,255,255,.3);
+    border-radius:25px;
+    overflow:hidden;
+
+}
+
+.progress{
+
+    height:100%;
+    width:0;
+    background:white;
+    transition:width 1s ease;
+
+}
+
+/* Risk Badge */
+
+.badge{
+
+    display:inline-block;
+    margin-top:15px;
+    padding:8px 15px;
+    border-radius:30px;
+    background:rgba(255,255,255,.25);
+    font-weight:600;
+
+}
+
+/* Footer */
+
+footer{
+
+    text-align:center;
+    margin-top:40px;
+    color:#6B7280;
+    font-size:14px;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.container{
+
+padding:20px;
+
+}
+
+.grid{
+
+grid-template-columns:1fr;
+
+}
+
+.hero h1{
+
+font-size:28px;
+
+}
+
+.section-title{
+
+font-size:20px;
+
+}
+
+button{
+
+font-size:16px;
+
+}
+
+}
+</style>
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Attrition Predictor</title>
+
+
+</head>
+
+<body>
+
+<div class="page">
+
+<div class="container">
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>👨‍💼 Employee Attrition Prediction</h1>
+
+        <p>
+            Predict whether an employee is likely to leave the company
+            using Machine Learning.
+        </p>
+
+    </div>
+
+    <!-- Personal -->
+
+    <h2 class="section-title">
+        👤 Personal Information
+    </h2>
+
+    <div class="grid">
+
+        <div class="field">
+
+            <label>Age</label>
+
+            <input type="number" id="Age" placeholder="Enter Age">
+
+        </div>
+
+        <div class="field">
+
+            <label>Job Role</label>
+
+            <select id="JobRole">
+
+                <option>Sales Executive</option>
+                <option>Research Scientist</option>
+                <option>Laboratory Technician</option>
+                <option>Manufacturing Director</option>
+                <option>Healthcare Representative</option>
+                <option>Manager</option>
+                <option>Sales Representative</option>
+                <option>Research Director</option>
+                <option>Human Resources</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- Employment -->
+
+    <h2 class="section-title">
+        💼 Employment Details
+    </h2>
+
+    <div class="grid">
+
+        <div class="field">
+
+            <label>Department</label>
+
+            <select id="Department">
+
+                <option>Sales</option>
+                <option>Research & Development</option>
+                <option>Human Resources</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>Business Travel</label>
+
+            <select id="BusinessTravel">
+
+                <option>Travel_Rarely</option>
+                <option>Travel_Frequently</option>
+                <option>Non-Travel</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>Education Field</label>
+
+            <select id="EducationField">
+
+                <option>Life Sciences</option>
+                <option>Medical</option>
+                <option>Marketing</option>
+                <option>Technical Degree</option>
+                <option>Human Resources</option>
+                <option>Other</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>Total Working Years</label>
+
+            <input
+            type="number"
+            id="TotalWorkingYears"
+            placeholder="Years" required>
+
+        </div>
+
+    </div>
+
+    <!-- Satisfaction -->
+
+    <h2 class="section-title">
+
+        😊 Satisfaction Details
+
+    </h2>
+
+    <div class="grid">
+
+        <div class="field">
+
+            <label>Job Satisfaction</label>
+
+            <select id="JobSatisfaction">
+
+                <option value="1">1 - Very Low</option>
+                <option value="2">2 - Low</option>
+                <option value="3">3 - High</option>
+                <option value="4">4 - Very High</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>Environment Satisfaction</label>
+
+            <select id="EnvironmentSatisfaction">
+
+                <option value="1">1 - Very Low</option>
+                <option value="2">2 - Low</option>
+                <option value="3">3 - High</option>
+                <option value="4">4 - Very High</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>Job Involvement</label>
+
+            <select id="JobInvolvement">
+
+                <option value="1">1 - Low</option>
+                <option value="2">2 - Medium</option>
+                <option value="3">3 - High</option>
+                <option value="4">4 - Very High</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>Years Since Last Promotion</label>
+
+            <input
+            type="number"
+            id="YearsSinceLastPromotion"
+            placeholder="Years">
+
+        </div>
+
+    </div>
+
+    <!-- Other -->
+
+    <h2 class="section-title">
+
+        ⚙ Other Details
+
+    </h2>
+
+    <div class="grid">
+
+        <div class="field">
+
+            <label>Do you work overtime?</label>
+
+            <select id="OverTime">
+
+                <option>Yes</option>
+                <option>No</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>Marital Status</label>
+
+            <select id="MaritalStatus">
+
+                <option>Single</option>
+                <option>Married</option>
+                <option>Divorced</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>Stock Option Level</label>
+
+            <select id="StockOptionLevel">
+
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>Number of Companies Worked</label>
+
+            <input
+            type="number"
+            id="NumCompaniesWorked"
+            placeholder="Companies">
+
+        </div>
+
+        <div class="field">
+
+            <label>Distance From Home (km)</label>
+
+            <input
+            type="number"
+            id="DistanceFromHome"
+            placeholder="Distance">
+
+        </div>
+
+    </div>
+
+    <!-- Button -->
+
+    <button id="predictBtn" onclick="predict()">
+
+        🤖 Predict Employee Attrition
+
+    </button>
+
+    <!-- Loading -->
+
+    <div id="loading" style="display:none;">
+
+        <div class="spinner"></div>
+
+        <p>
+
+            Please wait while the ML model analyzes employee data...
+
+        </p>
+
+    </div>
+
+    <!-- Result -->
+
+    <div id="result"></div>
+
+    <footer>
+
+      Built with ❤️ and ☕ using Flask + Scikit-learn
+
+    </footer>
+
+</div>
+
+</div>
+
+<script>
+    async function predict() {
+
+    const button = document.getElementById("predictBtn");
+    const loading = document.getElementById("loading");
+    const resultDiv = document.getElementById("result");
+
+    button.disabled = true;
+    loading.style.display = "block";
+    resultDiv.innerHTML = "";
+
+    const data = {
+
+        Age: Number(document.getElementById("Age").value),
+
+        JobRole: document.getElementById("JobRole").value,
+
+        OverTime: document.getElementById("OverTime").value,
+
+        MaritalStatus: document.getElementById("MaritalStatus").value,
+
+        BusinessTravel: document.getElementById("BusinessTravel").value,
+
+        Department: document.getElementById("Department").value,
+
+        EducationField: document.getElementById("EducationField").value,
+
+        JobInvolvement: Number(document.getElementById("JobInvolvement").value),
+
+        NumCompaniesWorked: Number(document.getElementById("NumCompaniesWorked").value),
+
+        StockOptionLevel: Number(document.getElementById("StockOptionLevel").value),
+
+        JobSatisfaction: Number(document.getElementById("JobSatisfaction").value),
+
+        YearsSinceLastPromotion: Number(document.getElementById("YearsSinceLastPromotion").value),
+
+        EnvironmentSatisfaction: Number(document.getElementById("EnvironmentSatisfaction").value),
+
+        TotalWorkingYears: Number(document.getElementById("TotalWorkingYears").value),
+
+        DistanceFromHome: Number(document.getElementById("DistanceFromHome").value)
+
+    };
+
+    try {
+
+        const response = await fetch("/predict", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(data)
+
+        });
+
+        const result = await response.json();
+
+        loading.style.display = "none";
+        button.disabled = false;
+
+        const prediction = result.prediction;
+        const confidence = Number(result.confidence).toFixed(2);
+
+        const stay = prediction === "No";
+
+        let risk = "";
+        let emoji = "";
+
+        if (confidence >= 85) {
+
+            risk = "High";
+            emoji = "🔴";
+
+        }
+        else if (confidence >= 60) {
+
+            risk = "Medium";
+            emoji = "🟡";
+
+        }
+        else {
+
+            risk = "Low";
+            emoji = "🟢";
+
+        }
+
+        resultDiv.innerHTML = `
+
+        <div class="result-card ${stay ? "stay" : "leave"}">
+
+            <h2>
+${stay
+    ? " Prediction: No"
+    : " Prediction: Yes"}
+
+            </h2>
+
+            <h3>
+
+            Confidence : ${confidence}%
+
+            </h3>
+
+            <div class="progress-bar">
+
+                <div
+                class="progress"
+                style="width:${confidence}%">
+                </div>
+
+            </div>
+
+            <div class="badge">
+
+                Risk Level :
+                ${emoji}
+                ${risk}
+
+            </div>
+
+        </div>
+
+        `;
+
+    }
+
+    catch (error) {
+
+        loading.style.display = "none";
+        button.disabled = false;
+
+        resultDiv.innerHTML = `
+
+        <div class="result-card leave">
+
+            <h2>❌ Error</h2>
+
+            <p>Unable to connect to Flask backend.</p>
+
+        </div>
+
+        `;
+
+        console.log(error);
+
+    }
+
+}
+</script>
+
+</body>
+
+</html>
